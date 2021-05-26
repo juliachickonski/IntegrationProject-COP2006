@@ -1,7 +1,6 @@
 // Julia Chickonski 
 // A look into what I have learned and a demonstration of my skills from COP2006 Programming I
 
-import java.security.PublicKey;
 import java.util.Scanner;
 
 	// byte: holds 1 byte with range of -128 to 127 (Whole numbers only)
