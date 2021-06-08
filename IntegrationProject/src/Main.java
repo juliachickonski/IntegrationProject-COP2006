@@ -1,7 +1,9 @@
 // Julia Chickonski 
-// A look into what I have learned and a demonstration of my skills from COP2006 Programming I
+// A look into what I have learned and a demonstration of my skills from COP2006- Programming I
 
+import java.util.Random;
 import java.util.Scanner;
+import java.lang.Math;
 
 	// byte: holds 1 byte with range of -128 to 127 (Whole numbers only)
 	// Short: holds 2 bytes with range of -32,768 to 32,767 (Whole numbers only)
@@ -12,60 +14,227 @@ import java.util.Scanner;
 	// Boolean: holds 1 bit, either true or false values
 	// Char: holds single 16-bit Unicode character
 
+	//Operator Precedence list
+	// expr++ , expr--
+	// ++expr , --expr , +expr , -expr
+	// multiplication (*), division (/), remainder (%)
+	// Addition (+) , Subtraction (-) 
+	// shift: << , >> , >>> 
+	// relational: < , > , <= , >= , instanceOf
+	// == , !=
+	// bitwise AND: &
+	// bitwise exclusive OR: ^
+	// bitwise inclusive OR: |
+	// logical AND: &&
+	// logical OR: ||
+	// ternary: booleanexpression ? expression 1 : expression 2 
+	//assignment: = += -= *= /= %= &= ^= |= <<= >>= >>>=
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		// Variable describes the area in the program where data values are stored 
 		// scope describes that variables can only be accessed within the certain area created
 		Scanner scan = new Scanner(System.in);
 		
 		//Introduction of User
 		// Use of a string variable
-		System.out.println("Welcome to my Integration Project! \nWhat is your name?");
-		String nameUser = scan.nextLine();
-		System.out.println("Hello "+ nameUser + "! Have fun interacting with my work.");
+		System.out.println("Welcome to my Integration Project! "
+				+ "\nPlease enter your first and last name (press enter between)");
+		String firstNameUser = scan.nextLine();
+		String lastNameUser = scan.nextLine();
 		
-		// Using a boolean variable and int variable
-		System.out.println("\nEnter Variable 1: ");
-		int variable1Int = scan.nextInt();
-		System.out.println("Enter Variable 2: ");
-		int variable2Int = scan.nextInt();
-
+		int nameDifference = firstNameUser.compareToIgnoreCase(lastNameUser);
 		
-		boolean trueBoolean = true;
-		boolean falseBoolean = false;
+		String name1Common = "Smith";
+		String name2Common = "Johnson";
+		String name3Common = "Williams";
 		
-		if(variable1Int > variable2Int) {
-			System.out.println("Variable 1 is greater than Variable 2: " + trueBoolean);
+		System.out.println("Hello "+ firstNameUser + "!. "
+				+ " Did you know, there is a difference of " + nameDifference + " lexicographically between your first and last name.");
+		
+		// equals method to determine if user has one of the most common last names
+		if (name1Common.equalsIgnoreCase(lastNameUser) == true||name2Common.equalsIgnoreCase(lastNameUser) == true||name3Common.equalsIgnoreCase(lastNameUser) == true) {
+			System.out.println("*Fun Fact: You have one of the most common last names in the US!*");
+			}
+		
+		int programRepeat = 0;
+		do {
+			System.out.println("\nWhat can I assist you with? \n1. Comparisons \n2. Casting Demo \n3. Calculator \n4. Random Machine");
+			int userChoice = scan.nextInt();
+			if (userChoice == 1) {
+			// Using a boolean variable and int variable
+				int repeatComparison = 0;
+				do {
+					System.out.println("Here you can enter two numbers to compare.\nEnter Variable 1 to compare: ");
+					double variable1Double = scan.nextDouble();
+					System.out.println("Enter Variable 2 to compare: ");
+					double variable2Double = scan.nextDouble();
+				
+					boolean trueBoolean = true;
+					boolean falseBoolean = false;
+				
+					if(variable1Double > variable2Double) {
+					System.out.println(variable1Double + " is greater than "+ variable2Double + ": " + trueBoolean);
+					}
+					else {
+						System.out.println(variable1Double + " is greater than "+ variable2Double + ": " + falseBoolean);
+					}
+					System.out.println("\nWhat should I do next? \n*press 1 to compare another set of numbers \n*press any other number to exit");
+					repeatComparison = scan.nextInt();
+				}
+				while(repeatComparison == 1);
+			}
+			
+			if (userChoice == 2) {
+	        // Demonstration of Casting
+				System.out.println("\nHere I am going to demonstrate widening casting"); // Widening casting converts from a smaller data type to a larger
+				int wideCastingInt = 45;
+				double wideCastingDouble = wideCastingInt;
+				System.out.println("Integer Value: " + wideCastingInt + "\nDouble Value: " + wideCastingDouble);
+	        
+				System.out.println("\nHere I am going to demonstrate narrowing casting"); // narrowing casting converts from a smaller data type to a larger
+				double narrowCastingDouble = 100.99;
+				int narrowCastingInt = (int)narrowCastingDouble;
+				System.out.println("Double Value: " + narrowCastingDouble + "\nInteger Value: " + narrowCastingInt);
+				
+				System.out.println("To see a further explination press 1, any other number to continue on");
+				int example2Choice = scan.nextInt();
+				if (example2Choice == 1) {
+					System.out.println("Widening casting brings a smaller data type to a larger one. \nNarrowing Casting converts a larger data type to a smaller one"
+							+"Press 1 to exit the program.");
+					int finalChoice = scan.nextInt();
+					if (finalChoice == 1) {
+						continue; // continue is used here to break the loop and give the user the goodbye message and end the program
+					}
+				}
+			}
+			if(userChoice == 3) {
+			//Calculator		
+				System.out.println("Welcome to the calculator! ");
+				int taskRepeat = 1;
+				do {
+					System.out.println("\nI can help you with... \n1. Addition \n2. Subtraction \n3. Multiplication \n4. Division \n5. Exponent ");
+					System.out.println("What do you need to solve? ");
+					int userMathChoice = scan.nextInt();
+					// Addition
+					if (userMathChoice == 1) {
+						double sum = getSum(scan); // the getSum is the method call and scan is the argument
+						System.out.println("Your total sum is: " + sum);
+					} 
+					//Subtraction
+					if (userMathChoice == 2) {
+						System.out.println("Enter the numbers you would like to subtract: ");
+						double num1 = scan.nextDouble();
+						double num2 = scan.nextDouble();
+						double totalSubtract = num1 - num2;
+						System.out.println("Your total is: " + totalSubtract);
+					} 
+					//multiplication
+					else if (userMathChoice == 3) {
+						System.out.println("How many numbers are you multiplying together?");
+						int numsToMultiply = scan.nextInt();
+						int numsCounter = 0;
+						double totalProduct = 1;
+						for (int numsMultiplying = 0; numsMultiplying < numsToMultiply ;) {
+							System.out.println("Enter the numbers you would like to multiply together");
+							while(numsCounter < numsToMultiply){
+								double x = scan.nextDouble();
+								totalProduct = totalProduct * x;
+								numsCounter++;
+							}
+							break; // The break is used here to stop program from infinitely looping
+						}
+						System.out.println("Your total product is: " + totalProduct);
+					}
+					// Division
+					else if (userMathChoice == 4) {
+						System.out.println("What is your dividend?: ");
+						double dividendNumber = scan.nextDouble();
+						System.out.println("What is your divisor?: ");
+						int divisorNumber = scan.nextInt();
+					
+						double quotient = dividendNumber / divisorNumber;
+						System.out.println("Your quotient is " + quotient);
+						if (dividendNumber % divisorNumber == 0) {
+							System.out.println("with no remainder.");
+						}	
+						else if(dividendNumber % divisorNumber > 0) {
+							double remainder = dividendNumber % divisorNumber;
+							System.out.println("with a remainder of " + remainder + ".");
+						}	
+					}
+					// Exponents
+					else if (userMathChoice == 5) {
+						System.out.println("Enter base: ");
+						double baseNumber = scan.nextDouble();
+						System.out.println("Enter Exponent: ");
+						double exponentNumber = scan.nextDouble();
+					
+						final double EXPONENTANSWER = (double) (Math.pow(baseNumber, exponentNumber)); 
+							//final is used here to create a constant for EXPONENTANSWER
+							//https://www.geeksforgeeks.org/final-keyword-java/
+						System.out.println("The answer is: " + EXPONENTANSWER); 
+					}
+					System.out.println("\nWhat should I do next? \n*press 1 to solve another \n*press any other number to continue");
+					taskRepeat = scan.nextInt();
+					}
+				while(taskRepeat == 1);
+			}
+			
+			if(userChoice ==4) {
+				// Magic 8 Ball
+				int decisionRepeat = 0;
+				do {
+					System.out.println("To help you decide, I can: \n1. Flip a coin \n2. Roll a dice");
+					int userRandomChoice = scan.nextInt();
+					Random random = new Random();
+					switch (userRandomChoice) {
+					case 1:
+						System.out.println("Heads or tails?");
+						int randomVariable = 1 + random.nextInt(1);
+						String userAnswer = (randomVariable == 1) ? "Heads" : "Tails";
+						System.out.println(userAnswer);
+						break;
+					case 2:
+						System.out.println("How many faces does your dice have?");
+						int numOfFaces = scan.nextInt();
+					
+						int diceRoll = 1 + random.nextInt(numOfFaces);
+						System.out.println("Your roll is: " + diceRoll);
+						break;
+					case 3: 
+		        	
+					}
+					System.out.println("\nWhat should I do next? \n*press 1 to decide another \n*press any other number to exit");
+					decisionRepeat = scan.nextInt();
+				}
+				while(decisionRepeat == 1);
+			} 
+			System.out.println("Press 1 to return to menu, any other number to exit the program");
+			programRepeat = scan.nextInt();
 		}
-		else {
-			System.out.println("Variable 1 is greater than Variable 2: " + falseBoolean);
+		while(programRepeat == 1); // == works  by comparing what is stored in programRepeat to 1 
+		//end of program message
+		System.out.println("\nThank You for looking through my Integration Project!");	
 		}
+	
+	//addition get
+	public static double getSum(Scanner scan) { //public is the header and (Scanner scan) is the parameter
+		System.out.println("How many numbers are you adding together?");
 		
-		//Using double variable type
-        System.out.println("\nEnter two numbers to multiply (press enter between each value): ");
-        final double variableDouble1, variableDouble2, productDouble;
-        	//final is used here to create a constant for all 3 double variables
-        	//https://www.geeksforgeeks.org/final-keyword-java/
-        variableDouble1 = scan.nextDouble();
-        variableDouble2 = scan.nextDouble();
-        productDouble = variableDouble1 * variableDouble2;
-        System.out.println("The product of " + variableDouble1 + " and " + variableDouble2 + " equals " + productDouble + ".");
-        
-        // Demonstration of Casting
-        System.out.println("\nHere I am going to demonstrate widening casting"); // Widening casting converts from a smaller data type to a larger
-        int wideCastingInt = 45;
-        double wideCastingDouble = wideCastingInt;
-        System.out.println("Integer Value: " + wideCastingInt + "\nDouble Value: " + wideCastingDouble);
-        
-        System.out.println("\nHere I am going to demonstrate narrowing casting"); // narrowing casting converts from a smaller data type to a larger
-        double narrowCastingDouble = 100.99;
-        int narrowCastingInt = (int)narrowCastingDouble;
-        System.out.println("Double Value: " + narrowCastingDouble + "\nInteger Value: " + narrowCastingInt);
-        
-		System.out.println("\nThank You for looking through my Integration Project!");
-		scan.close();
+		int numsToAdd = scan.nextInt();
+		int numsCounter = 0;
+		double sum = 0;
+		for (int numsAdding = 0; numsAdding < numsToAdd ;) {
+			System.out.println("Enter the numbers you would like to add");
+			while(numsCounter < numsToAdd){
+				double x = scan.nextDouble();
+				sum += x;
+				numsCounter++;
+				numsAdding++;
+			}
 		}
+		return sum;
 	}
-
+}
