@@ -176,7 +176,7 @@ public class Main {
 							//https://www.geeksforgeeks.org/final-keyword-java/
 						System.out.println("The answer is: " + EXPONENTANSWER); 
 					}
-					System.out.println("\nWhat should I do next? \n*press 1 to solve another \n*press any other number to continue");
+					System.out.println("\nWhat should I do next? \n*press 1 to return to math menu \n*press any other number to continue");
 					taskRepeat = scan.nextInt();
 					}
 				while(taskRepeat == 1);
