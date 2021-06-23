@@ -1,6 +1,8 @@
 // Julia Chickonski 
 // A look into what I have learned and a demonstration of my skills from COP2006- Programming I
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.Math;
@@ -29,6 +31,12 @@ import java.lang.Math;
 	// logical OR: ||
 	// ternary: booleanexpression ? expression 1 : expression 2 
 	//assignment: = += -= *= /= %= &= ^= |= <<= >>= >>>=
+
+	// inheritance is the  process where one class acquires the methods and fields of another parent class
+	// follows a hierarchy
+	// useful because you can reuse methods and fields of the parent class. 
+
+	// Polymorphism describes how subclasses can perform their own actions while still relating to the same parent class
 
 public class Main {
 
@@ -60,7 +68,7 @@ public class Main {
 		
 		int programRepeat = 0;
 		do {
-			System.out.println("\nWhat can I assist you with? \n1. Comparisons \n2. Casting Demo \n3. Calculator \n4. Random Machine");
+			System.out.println("\nWhat can I assist you with? \n1. Comparisons \n2. Casting Demo \n3. Calculator \n4. Random Machine \n5. Array Demo");
 			int userChoice = scan.nextInt();
 			if (userChoice == 1) {
 			// Using a boolean variable and int variable
@@ -125,10 +133,14 @@ public class Main {
 					//Subtraction
 					if (userMathChoice == 2) {
 						System.out.println("Enter the numbers you would like to subtract: ");
-						double num1 = scan.nextDouble();
-						double num2 = scan.nextDouble();
-						double totalSubtract = num1 - num2;
-						System.out.println("Your total is: " + totalSubtract);
+						try {
+							double num1 = scan.nextDouble();
+							double num2 = scan.nextDouble();
+							double totalSubtract = num1 - num2;
+							System.out.println("Your total is: " + totalSubtract);
+						}catch (Exception e) {
+							System.out.println("Sorry your input is invalid");
+						}
 					} 
 					//multiplication
 					else if (userMathChoice == 3) {
@@ -211,6 +223,53 @@ public class Main {
 				}
 				while(decisionRepeat == 1);
 			} 
+
+			if (userChoice == 5){
+		        System.out.println("How large would you like the array?");
+		        int arraySize = scan.nextInt(); // user inputs size of array
+		        int[] exampleArray = new int [arraySize]; // creates an array from the arraySize
+		        
+		        System.out.println("Enter the numbers you would like in the array:");
+		        for (int location = 0; location < arraySize;location++) { 
+		            exampleArray[location] = scan.nextInt(); // user inputs the array values
+		            }
+		        
+		        
+		        int indexValue = 0; 
+		        int smallestValue = exampleArray[indexValue];
+		        int sum = 0;
+		        
+		        for(int x = 0; x < exampleArray.length; x++) {
+		            if(exampleArray[x] <= smallestValue) {
+		                smallestValue = (exampleArray[x]);
+		                indexValue = x;
+		            }
+		            sum += exampleArray[x];
+		        }
+		        System.out.println("The smallest value is: " + smallestValue);
+		        System.out.println("The index of the smallest value is: " + indexValue);
+		        System.out.println("The sum of all the values in your array is: " + sum);
+		        
+		        ArrayList<Integer> exampleArray2 = new ArrayList<Integer>(); // creates an array from the arraySize
+		        
+		        System.out.println("Here is a list of numbers stored in an ArrayList:");
+		        exampleArray2.add(57);
+		        exampleArray2.add(15);
+		        exampleArray2.add(6);
+		        exampleArray2.add(64);
+		        exampleArray2.add(3569);
+		        exampleArray2.add(4);
+
+		        for (int i : exampleArray2) {
+		            System.out.println(i);
+		          }
+		        
+		        Collections.sort(exampleArray2); 
+
+		        int smallestNumber = exampleArray2.get(0);
+		        System.out.println("The smallest value in this list is: "+ smallestNumber);
+		        }
+			
 			System.out.println("Press 1 to return to menu, any other number to exit the program");
 			programRepeat = scan.nextInt();
 		}
@@ -220,20 +279,19 @@ public class Main {
 		}
 	
 	//addition get
-	public static double getSum(Scanner scan) { //public is the header and (Scanner scan) is the parameter
-		System.out.println("How many numbers are you adding together?");
-		
-		int numsToAdd = scan.nextInt();
-		int numsCounter = 0;
-		double sum = 0;
-		for (int numsAdding = 0; numsAdding < numsToAdd ;) {
-			System.out.println("Enter the numbers you would like to add");
-			while(numsCounter < numsToAdd){
-				double x = scan.nextDouble();
-				sum += x;
-				numsCounter++;
-				numsAdding++;
-			}
+	public static double getSum(Scanner scan) { //public is the header and (Scanner scan) is the parameter		
+        System.out.println("How many numbers are you adding together?");
+        int arraySize = scan.nextInt(); // user inputs size of array
+        int[] additionArray = new int [arraySize]; // creates an array from the arraySize
+        
+        System.out.println("Enter the numbers you would like to add:");
+        for (int location = 0; location < arraySize;location++) { 
+            additionArray[location] = scan.nextInt(); // user inputs the array values
+            }
+        
+        int sum = 0;       
+        for(int x : additionArray) {
+            sum += x;
 		}
 		return sum;
 	}
